@@ -6,36 +6,49 @@ var players = {
         "name":"soon",
         "scoreTemp": 0,
         "scoreTotal":0,
+        "pourcentage": 0,
     },
     "B":{
         "name":"benbest",
         "scoreTemp": 0,
         "scoreTotal":0,
+        "pourcentage": 0,
+
     },
     "C":{
         "name":"nicoh",
         "scoreTemp": 0,
         "scoreTotal":0,
+        "pourcentage": 0,
+
     },
     "D":{
         "name":"unkoe",
         "scoreTemp": 0,
         "scoreTotal":0,
+        "pourcentage": 0,
+
     },    
     "E":{
         "name":"hyp",
         "scoreTemp": 0,
         "scoreTotal":0,
+        "pourcentage": 0,
+
     },
     "F":{
         "name":"Poko",
         "scoreTemp": 0,
         "scoreTotal":0,
+        "pourcentage": 0,
+
     },
     "G":{
         "name":"aKm",
         "scoreTemp": 0,
         "scoreTotal":0,
+        "pourcentage": 0,
+
     }
     };
 
@@ -49,9 +62,9 @@ var responses = [{
     6:["B","F"],
     7:["D","E"]
 }, {
-    8:["F"],
-    9:["A","B","C","E"],
-    10:["D","G"]
+    8:["F","A"],
+    9:["C","G"],
+    10:["B","D","G"]
 }, {
     11:["B","E","F"],
     12:["A","D"],
@@ -63,20 +76,28 @@ var responses = [{
     16:["D","G","E"],
     17:["B"]
 },
-
-//FAUSSES ROUTES
-
 {
-    18:["A","B"],
-    19:["C","D","E"],
-    20:["F","G"],
+    18:["A","C"],
+    19:["E","F"],
+    20:["G"],
+    21:["B","D"]
 
 },
 {
-    21:["C","D"],
-    22:["A","F","E"],
-    23:["G","B"],
-
+    22:["F","C"],
+    23:["D","G"],
+    24:["A"],
+    25:["B","E"]
+},{
+    26:["A","C"],
+    27:["G","D"],
+    28: ["B"],
+    29:["E","F"]
+},
+{
+    30:["F"],
+    31:["A","B","C","E"],
+    32:["D","G"]
 }
 
 ];
@@ -90,33 +111,43 @@ for(rone in responses[0]){
                 for(rfive in responses[4]){
                     for(rsix in responses[5]){
                         for(rseven in responses[6]){
+                            for(rheigh in responses[7]){
+                                for(rnine in responses[8]){
 
-                            responses[0][rone].forEach(element => {
-                                players[element].scoreTemp ++;
-                            });
-                            responses[1][rtwo].forEach(element => {
-                                players[element].scoreTemp ++;
-                            });
-                            responses[2][rthree].forEach(element => {
-                                players[element].scoreTemp ++;
-                            });
-                            responses[3][rfourth].forEach(element => {
-                                players[element].scoreTemp ++;
-                            });
-                            responses[4][rfive].forEach(element => {
-                                players[element].scoreTemp ++;
-                            });
-                            responses[5][rsix].forEach(element => {
-                                players[element].scoreTemp ++;
-                            });
-                            responses[6][rseven].forEach(element => {
-                                players[element].scoreTemp ++;
-                                });
-                            //check doublons
-                            checkDoublons();
-                            addScorePlayers();
-                            resetPlayersTemp();
-                            numberRoutes++;
+                                    responses[0][rone].forEach(element => {
+                                        players[element].scoreTemp ++;
+                                    });
+                                    responses[1][rtwo].forEach(element => {
+                                        players[element].scoreTemp ++;
+                                    });
+                                    responses[2][rthree].forEach(element => {
+                                        players[element].scoreTemp ++;
+                                    });
+                                    responses[3][rfourth].forEach(element => {
+                                        players[element].scoreTemp ++;
+                                    });
+                                    responses[4][rfive].forEach(element => {
+                                        players[element].scoreTemp ++;
+                                    });
+                                    responses[5][rsix].forEach(element => {
+                                        players[element].scoreTemp ++;
+                                    });
+                                    responses[6][rseven].forEach(element => {
+                                        players[element].scoreTemp ++;
+                                        });
+                                    responses[7][rheigh].forEach(element => {
+                                        players[element].scoreTemp ++;
+                                        });
+                                    responses[8][rnine].forEach(element => {
+                                        players[element].scoreTemp ++;
+                                        });                                       
+                                    //check doublons
+                                    checkDoublons();
+                                    addScorePlayers();
+                                    resetPlayersTemp();
+                                    numberRoutes++;
+                                }
+                            }
                         }
                     }
                 }
@@ -156,6 +187,11 @@ function checkDoublons(){
         doublons++;
     }
 }
+
+function toHundredth(nombre){
+    return Math.round(100*nombre)/100;
+}
+
 function compareValues(key, order='asc') {
     return function(a, b) {
       if(!a.hasOwnProperty(key) || 
@@ -180,6 +216,10 @@ function compareValues(key, order='asc') {
       );
     };
   }
+
+allplayers.forEach(element => {
+    players[element].pourcentage = toHundredth((players[element].scoreTotal/numberRoutes*100))+'%';
+});
 console.log(doublons);
 console.log(numberRoutes);
 
